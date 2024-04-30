@@ -1,0 +1,61 @@
+CREATE TABLE roles (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL,
+    descripcion TEXT
+);
+
+CREATE TABLE cajas (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL,
+    descripcion TEXT,
+    ubicacion VARCHAR(100)
+);
+
+
+CREATE TABLE usuarios(
+	id int PRIMARY KEY AUTO_INCREMENT,
+    nombre varchar(100) not null,
+    apellidoP varchar(100) not null,
+    apellidoM varchar(100) not null,
+    usuario varchar(50) not null,
+    pass varchar(255) not null,
+    idRol INT,
+    idCaja INT,
+    status varchar(1) NOT NULL DEFAULT 'A',
+    FOREIGN KEY (idRol) REFERENCES roles(id),
+    FOREIGN KEY (idCaja) REFERENCES cajas(id)
+)
+
+CREATE TABLE categorias (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    descripcion TEXT
+);
+
+
+CREATE TABLE um (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL,
+    abreviatura VARCHAR(10),
+    descripcion TEXT
+);
+
+CREATE TABLE proveedor (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(255),
+    telefono VARCHAR(20),
+    correoElectronico VARCHAR(255),
+    paginaWeb VARCHAR(255),
+    descripcion TEXT,
+    status varchar(1) NOT NULL DEFAULT 'A'
+);
+
+CREATE TABLE contacto (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    idProveedor INT,
+    nombre VARCHAR(255),
+    correoElectronico VARCHAR(255),
+    telefono VARCHAR(20),
+    FOREIGN KEY (idProveedor) REFERENCES proveedor(id),
+    status varchar(1) NOT NULL DEFAULT 'A'
+);
